@@ -23,3 +23,5 @@
 /Expr$Assign.class
 /Stmt$Block.class
 /Stmt$If.class
+/Expr$Logical.class
+/Stmt$While.class
