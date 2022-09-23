@@ -1,5 +1,8 @@
 package com.craftinginterpreters.lox;
 
+import com.craftinginterpreters.lox.Expr.Assign;
+import com.craftinginterpreters.lox.Expr.Variable;
+
 class AstPrinter implements Expr.Visitor<String> {
   String print(Expr expr) {
     return expr.accept(this);
@@ -50,4 +53,16 @@ class AstPrinter implements Expr.Visitor<String> {
 
     System.out.println(new AstPrinter().print(expression));
   }
+
+@Override
+public String visitAssignExpr(Assign expr) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public String visitVariableExpr(Variable expr) {
+	// TODO Auto-generated method stub
+	return null;
+}
 }

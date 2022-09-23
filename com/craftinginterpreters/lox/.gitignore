@@ -13,3 +13,12 @@
 /TokenType.class
 /Interpreter.class
 /RuntimeError.class
+/Stmt.class
+/Stmt$Visitor.class
+/Expr$Variable.class
+/Stmt$Expression.class
+/Stmt$Print.class
+/Stmt$Var.class
+/Environment.class
+/Expr$Assign.class
+/Stmt$Block.class
