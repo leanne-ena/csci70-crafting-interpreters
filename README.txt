@@ -19,9 +19,29 @@ do {
 
 ### Support the bang operator for numbers.
 ```
-print !0;
-var x = 1;
-print !x;
+	@Override
+	public Object visitUnaryExpr(Expr.Unary expr) {
+		Object right = evaluate(expr.right);
+
+	    switch (expr.operator.type) {
+	        case BANG:
+	            return !isTruthy(right);
+	    	case MINUS:
+	    		checkNumberOperand(expr.operator, right);
+	    		return -(double)right;
+
+	    }
+	    // Unreachable.
+	    return null;
+	}
+	
+	private boolean isTruthy(Object object) {
+		if (object instanceof Double &&  Double.parseDouble(stringify(object)) != 0) return true;
+		if (Integer.parseInt(stringify(object)) == 0) return false;
+		if (object == null) return false;
+		if (object instanceof Boolean) return (boolean)object;
+		return true;
+	}
 ```
 
 ### Implement “ASMD”
