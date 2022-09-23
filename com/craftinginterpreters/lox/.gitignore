@@ -22,3 +22,4 @@
 /Environment.class
 /Expr$Assign.class
 /Stmt$Block.class
+/Stmt$If.class
