@@ -58,8 +58,8 @@ class Interpreter implements Expr.Visitor<Object>,
 	}
 	
 	private boolean isTruthy(Object object) {
+		if (object instanceof Double &&  Double.parseDouble(stringify(object)) != 0) return true;
 		if (Integer.parseInt(stringify(object)) == 0) return false;
-		if (object instanceof Double) return true;
 		if (object == null) return false;
 		if (object instanceof Boolean) return (boolean)object;
 		return true;
