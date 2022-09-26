@@ -25,3 +25,11 @@
 /Stmt$If.class
 /Expr$Logical.class
 /Stmt$While.class
+/Stmt$DoWhile.class
+/Stmt$Visitor$Block.class
+/Stmt$Visitor$DoWhile.class
+/Stmt$Visitor$Expression.class
+/Stmt$Visitor$If.class
+/Stmt$Visitor$Print.class
+/Stmt$Visitor$Var.class
+/Stmt$Visitor$While.class

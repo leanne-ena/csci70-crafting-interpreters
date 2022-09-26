@@ -9,6 +9,8 @@ import static com.craftinginterpreters.lox.TokenType.*;
 class Parser {
   private static class ParseError extends RuntimeException {}
 
+private static final TokenType DO = null;
+
   private final List<Token> tokens;
   private int current = 0;
 
@@ -41,6 +43,7 @@ class Parser {
 	  }
   
   private Stmt statement() {
+	if (match(DO)) return doWhileStatement();
 	if (match(FOR)) return forStatement();
 	if (match(IF)) return ifStatement();
     if (match(PRINT)) return printStatement();
@@ -49,6 +52,19 @@ class Parser {
     
     return expressionStatement();
   }
+  private Stmt doWhileStatement() {
+	  	Stmt var_dec = varDeclaration();							// used the variable declaration statement object
+	  	
+		consume(LEFT_BRACE, "Expect '{' after 'do'.");					
+		Stmt doStatement = statement();
+		consume(RIGHT_BRACE, "Expect '}' after do statement.");
+		
+		consume(LEFT_PAREN, "Expect '(' after 'while'.");
+	    Expr condition = expression();
+	    consume(RIGHT_PAREN, "Expect ')' after condition.");
+		consume(SEMICOLON, "Expect ';' after while statement.");
+		return new Stmt.While(condition, doStatement);
+	}
   
   private Stmt forStatement() {
 	    consume(LEFT_PAREN, "Expect '(' after 'for'.");
