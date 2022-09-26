@@ -207,21 +207,9 @@ class Parser {
   }
 
   private Expr comparison() {
-    Expr expr = term();
-
-    while (match(GREATER, GREATER_EQUAL, LESS, LESS_EQUAL)) {
-      Token operator = previous();
-      Expr right = term();
-      expr = new Expr.Binary(expr, operator, right);
-    }
-
-    return expr;
-  }
-
-  private Expr term() {
     Expr expr = factor();
 
-    while (match(MINUS, PLUS)) {
+    while (match(GREATER, GREATER_EQUAL, LESS, LESS_EQUAL)) {
       Token operator = previous();
       Expr right = factor();
       expr = new Expr.Binary(expr, operator, right);
@@ -229,11 +217,23 @@ class Parser {
 
     return expr;
   }
-
+  
   private Expr factor() {
+	    Expr expr = term();
+
+	    while (match(SLASH, STAR)) {
+	      Token operator = previous();
+	      Expr right = term();
+	      expr = new Expr.Binary(expr, operator, right);
+	    }
+
+	    return expr;
+	  }
+
+  private Expr term() {
     Expr expr = unary();
 
-    while (match(SLASH, STAR)) {
+    while (match(MINUS, PLUS)) {
       Token operator = previous();
       Expr right = unary();
       expr = new Expr.Binary(expr, operator, right);
@@ -241,6 +241,8 @@ class Parser {
 
     return expr;
   }
+
+  
 
   private Expr unary() {
     if (match(BANG, MINUS)) {
